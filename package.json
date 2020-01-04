@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend services for hit200",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "hit200",
+    "ngonidzashe",
+    "mangudya"
+  ],
+  "author": "Ngonidzashe Mangudya",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "js-sha512": "^0.8.0",
+    "mongoose": "^5.8.4",
+    "morgan": "^1.9.1"
+  }
+}
