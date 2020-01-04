@@ -2,7 +2,7 @@ const config = require('./config');
 const app = require('./app');
 const db = require('./db');
 
-console.log(config.env);
+console.log(`${config.env} ${config.port} ${config.db}`);
 
 db().then(dbconnection => {
     console.log('db connected');
