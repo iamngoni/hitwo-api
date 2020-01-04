@@ -8,4 +8,4 @@ db().then(dbconnection => {
     app.listen(config.port, () => {
         console.log(`API up on port: ${config.port}`);
     });
-}).catch(e => consolg.log(e.message));
+}).catch(e => console.log(e.message));
