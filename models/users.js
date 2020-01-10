@@ -23,6 +23,7 @@ var userSchema = mongoose.Schema({
     verificationToken: String,
     hash: String,
     salt: String,
+    otp: Number
 });
 
 userSchema.methods.setPassword = function(password){
