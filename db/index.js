@@ -13,7 +13,7 @@ function connect(){
             useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true
-        }).then(dbconection => dbconnection).catch(e => console.log(e));
+        }).then(dbconnection => dbconnection).catch(e => console.log(e));
     }else{
         console.log("This doesn't work");
     }
