@@ -1,18 +1,17 @@
 const mongoose = require('mongoose');
 
 var productsSchema = mongoose.Schema({
-    brandName: {
+    name: {
         type: String,
         required: true
     },
-    productName: {
+    model: {
         type: String,
         required: true
     },
     imageUrl: {
         type: String,
         required: true,
-        uniquw: true
     },
     colors: {
         type: Array,
@@ -34,19 +33,27 @@ var productsSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    shopName: {
+    storeName: {
         type: String
     },
-    shopId: {
+    storeId: {
         type: String
     },
-    shopAddress: {
+    storeAddress: {
         type: String
     },
-    shopLocation: {
-        latitude: String,
-        longitude: String
-    }
+    storeLatitude: String,
+    storeLongitude: String,
+    category: String,
+    metadata: {
+        type: Array,
+        default: []
+    },
+    gallery: {
+        type: Array,
+        default: []
+    },
+    description: String
 });
 
 module.exports = mongoose.model('Products', productsSchema);
