@@ -10,7 +10,6 @@ router.post('/', (req, res) => {
             });
         }
         return res.status(200).json({
-            message: 'Store Authenticated Successfully',
             name: store.name,
             email: store.contact.email,
             phone: store.contact.phone,
