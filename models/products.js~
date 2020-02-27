@@ -16,7 +16,7 @@ var productsSchema = mongoose.Schema({
     },
     colors: {
         type: Array,
-        default: [],
+        default: ["white", "black"],
     },
     size: {
         type: Number,
@@ -39,13 +39,6 @@ var productsSchema = mongoose.Schema({
     },
     shopId: {
         type: String
-    },
-    shopAddress: {
-        type: String
-    },
-    shopLocation: {
-        latitude: String,
-        longitude: String
     }
 });
 
