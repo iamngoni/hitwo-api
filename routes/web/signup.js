@@ -6,10 +6,10 @@ router.post('/', (req, res) => {
     var shop = new Store();
     shop.name = name;
     shop.address = address;
-    shop.location.latitude = latitude;
-    shop.location.longitude = longitude;
-    shop.contact.email = email;
-    shop.contact.phone = phone;
+    shop.latitude = latitude;
+    shop.longitude = longitude;
+    shop.email = email;
+    shop.phone = phone;
 
     shop.setPassword(password);
     shop.setVerification();

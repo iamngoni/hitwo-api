@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Store = require('./../../models/store');
+const crypto = require('crypto');
 
 router.post('/', (req, res) => {
     var { email, password } = req.body;
@@ -11,12 +12,13 @@ router.post('/', (req, res) => {
         }
         return res.status(200).json({
             name: store.name,
-            email: store.contact.email,
-            phone: store.contact.phone,
             address: store.address,
-            latitude: store.location.latitude,
-            longitude: store.location.longitude
-        });
+            latitude: store.latitude,
+            longitude: store.longitude,
+            email: store.email,
+            phone: store.phone,
+            message: "Store Authenticated Successfully"
+        });  
     }).catch((err) => {
         console.log(err);
         return res.status(500).json({

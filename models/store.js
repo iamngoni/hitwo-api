@@ -9,19 +9,15 @@ var storeSchema = mongoose.Schema({
     address: {
         type: String
     },
-    location: {
-        latitude: String,
-        longitude: String
+    latitude: String,
+    longitude: String,
+    email: {
+        type: String,
+        unique: true
     },
-    contact: {
-        email: {
-            type: String,
-            unique: true
-        },
-        phone: {
-            type: String,
-            unique: true
-        }
+    phone: {
+        type: String,
+        unique: true
     },
     products: {
         type: Array,
