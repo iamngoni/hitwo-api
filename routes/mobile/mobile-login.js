@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const messagebird = require('messagebird')('1havDyD2gjemhVWz7zmjxqkn0');
-var Users = require('./../../models/users');
+var Users = require('../../models/users');
 
 router.post('/get', (req, res) => {
     var {mobileNumber} = req.body;
