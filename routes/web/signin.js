@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Store = require('./../../models/store');
-const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 router.post('/', (req, res) => {
     var { email, password } = req.body;
@@ -10,6 +10,12 @@ router.post('/', (req, res) => {
                 message: 'Email or password don\'t match. Try again or create an account.'
             });
         }
+
+        const payload = { store };
+        const options = { expiresIn: '2d', issuer: 'https://hitwo-api.herokuapp.com' };
+        const secret = process.env.JWT_SECRET;
+        const token = jwt.sign(payload, secret, options);
+
         return res.status(200).json({
             name: store.name,
             address: store.address,
@@ -17,6 +23,7 @@ router.post('/', (req, res) => {
             longitude: store.longitude,
             email: store.email,
             phone: store.phone,
+            token: token,
             message: "Store Authenticated Successfully"
         });  
     }).catch((err) => {
