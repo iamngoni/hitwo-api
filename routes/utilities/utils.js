@@ -2,9 +2,10 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     validateToken: (req, res, next) => {
+        console.log('validating');
         const authorisationHeader = req.headers.authorisation;
         let result;
-        if (authorisationHeader) {
+        if (authorisationHeader != null) {
             const token = req.authorisation.split(' ')[1];
             const options = { expiresIn: '2d', issuer: 'https://hitwo-api.herokuapp.com' };
             try {

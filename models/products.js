@@ -42,8 +42,8 @@ var productsSchema = mongoose.Schema({
     storeAddress: {
         type: String
     },
-    storeLatitude: String,
-    storeLongitude: String,
+    storeLatitude: Number,
+    storeLongitude: Number,
     category: String,
     metadata: {
         type: Array,

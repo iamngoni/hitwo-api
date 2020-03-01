@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const Products = require('../../models/products');
+const utils = require('./utils');
 
-router.get('/', (req, res) => {
+router.get('/', utils.validateToken, (req, res) => {
+    const payload = req.decoded;
+    console.log(payload);
     Products.find()
         .then((data) => {
             if(!data){
