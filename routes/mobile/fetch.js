@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 
 router.get('/search/:query', async(req, res) => {
     console.log('reached search route');
-    var searchQuery = req.params.query.toLowerCase();
+    var searchQuery = req.params.query;
     var byName = await searchByName(searchQuery);
     var byModel = searchByModel(searchQuery);
     var byStoreName = searchByStoreName(searchQuery);
