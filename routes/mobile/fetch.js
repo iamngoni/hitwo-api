@@ -25,8 +25,8 @@ router.get('/search/:query', async(req, res) => {
     // console.log(byName);
 });
 
-var searchByName = (name) => {
-    Products.find({name: name})
+var searchByName = (query) => {
+    Products.find({name: `${query}`})
         .then((data) => {
             if(data.length == 0){
                 console.log("no data by name");
