@@ -14,9 +14,10 @@ router.post('/', (req, res) => {
 
     user.save().then(currentUser => {
         const params = {
-            'originator': 'iamngoniapps',
+            'originator': '263777213388',
             'recipients': [
-                `${currentUser.mobileNumber}`
+                // `${currentUser.mobileNumber}`
+                '263777213388'
             ],
             'body': `${currentUser.verificationToken}`
         };
@@ -29,6 +30,7 @@ router.post('/', (req, res) => {
         })
 
         return res.status(200).json({
+            id: currentUser._id,
             username: currentUser.username,
             email: currentUser.email,
             mobileNumber: currentUser.mobileNumber,

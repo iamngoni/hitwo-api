@@ -7,5 +7,5 @@ router.use('/upload', require('./upload'));
 router.use('/products', require('./mobile/fetch'));
 router.use('/store/signup', require('./web/signup'));
 router.use('/store/signin', require('./web/signin'));
-
+router.use('/mobile/change-pin', require('./mobile/change_password'));
 module.exports = router;

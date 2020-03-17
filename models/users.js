@@ -37,7 +37,7 @@ userSchema.methods.validatePassword = function(password){
 };
 
 userSchema.methods.setVerification = function(mobileNumber){
-    var theString = mobileNumber.slice(3, 7);
+    var theString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     this.verificationToken = theString;
 }
 

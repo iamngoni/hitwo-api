@@ -10,6 +10,7 @@ router.post('/', (req, res) => {
             });
         }
         return res.status(200).json({
+            id: currentUser._id,
             username: user.username,
             email: user.email,
             mobileNumber: user.mobileNumber,
