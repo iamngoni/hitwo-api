@@ -23,6 +23,10 @@ router.post('/', (req, res) => {
             message: 'Server error. Try again'
         });
     });
-})
+});
+
+// router.get('/mobile/:number', (req, res) => {
+//     var number = req.params.number;
+// });
 
 module.exports = router;
