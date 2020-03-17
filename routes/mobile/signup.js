@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const Users = require('./../../models/users');
+const messagebird = require('messagebird')('EGtp0SNhNF1ee9XiZ4SfUc1NG');
+
 
 router.post('/', (req, res) => {
     var {username, email, password, mobileNumber} = req.body;
@@ -11,6 +13,21 @@ router.post('/', (req, res) => {
     user.setVerification(mobileNumber);
 
     user.save().then(currentUser => {
+        const params = {
+            'originator': 'iamngoniapps',
+            'recipients': [
+                `${currentUser.mobileNumber}`
+            ],
+            'body': `${currentUser.verificationToken}`
+        };
+
+        messagebird.messages.create(params, (err, response) => {
+            if(err){
+                return console.log(err);
+            }
+            console.log(response);
+        })
+
         return res.status(200).json({
             username: currentUser.username,
             email: currentUser.email,
