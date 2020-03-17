@@ -1,9 +1,9 @@
 const Users = require('./../../models/users');
 const router = require('express').Router();
+const crypto = require('crypto');
 
-router.post('/:id', (req, res) => {
-    var id = req.params.id;
-    var {currentPassword, newPassword} = req.body;
+router.post('/', (req, res) => {
+    var {id, currentPassword, newPassword} = req.body;
 
     console.log(id);
     console.log(currentPassword);
@@ -16,7 +16,25 @@ router.post('/:id', (req, res) => {
         }
 
         if(user.validatePassword(currentPassword)){
-            user.setPassword(newPassword);
+            Users.updateOne(
+                {_id: id},
+                {
+                    $set: {
+                        hash: crypto.pbkdf2Sync(newPassword, user.salt, 10000, 512, "sha512").toString('hex')
+                    },
+                },
+                (err, doc) => {
+                    if(!err){
+                        return res.status(200).json({
+                            message: "password changed"
+                        });
+                    }else{
+                        return res.status(500).json({
+                            message: "server error"
+                        });
+                    }
+                }
+            )
         }else{
             return res.status(403).json({
                 message: "current password is wrong"

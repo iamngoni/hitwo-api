@@ -35,25 +35,4 @@ router.get('/verify/:id/:token', (req, res) => {
     }).catch(e => console.log(e));
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-  module.exports = router;
+module.exports = router;
