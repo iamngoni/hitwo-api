@@ -4,10 +4,6 @@ const crypto = require('crypto');
 
 router.post('/', (req, res) => {
     var {id, currentPassword, newPassword} = req.body;
-
-    console.log(id);
-    console.log(currentPassword);
-    console.log(newPassword);
     Users.findById(id).then((user) => {
         if(!user){
             return res.status(404).json({
