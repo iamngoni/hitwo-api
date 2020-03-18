@@ -43,7 +43,7 @@ router.get('/verify/:id/:token', (req, res) => {
 router.get('/get_token/:number', (req, res) => {
     const number = req.params.number;
 
-    const from = 'Product Locator';
+    const from = 'iamngoniapps';
     const to = `${number}`;
     var text = "";
 
