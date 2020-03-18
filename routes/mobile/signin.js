@@ -9,6 +9,7 @@ router.post('/', (req, res) => {
                 message: 'Username or password don\'t match. Try again or create an account.'
             });
         }
+
         return res.status(200).json({
             id: user._id,
             username: user.username,
@@ -24,9 +25,5 @@ router.post('/', (req, res) => {
         });
     });
 });
-
-// router.get('/mobile/:number', (req, res) => {
-//     var number = req.params.number;
-// });
 
 module.exports = router;

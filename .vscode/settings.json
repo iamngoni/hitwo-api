@@ -1,7 +1,7 @@
 {
     "//a": "This theme is familiar to devs",
     "!a": "You need to install this theme",
-    "workbench.colorTheme": "SynthWave '84",
+    "workbench.colorTheme": "Kimbie Dark",
     "//b": "Minor tweaks to improve contrast & make cursor stands out",
     "workbench.colorCustomizations": {
         "editorCursor.background": "#ffffff",
