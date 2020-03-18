@@ -53,7 +53,7 @@ router.get('/get_token/:number', (req, res) => {
                 message: "Mobile number not found"
             });
         }
-        text = `Product Locator Verification Code: ${user.verificationToken} \n`;
+        text = `Product Locator Verification Code: ${user.verificationToken} \n\n`;
         nexmo.message.sendSms(from, to, text, (err, response) => {
             if(err){
                 return console.log(`messaging error! ${err}`);
