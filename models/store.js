@@ -19,10 +19,6 @@ var storeSchema = mongoose.Schema({
         type: String,
         unique: true
     },
-    products: {
-        type: Array,
-        default: []
-    },
     hash: String,
     salt: String
 });

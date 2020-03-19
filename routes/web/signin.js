@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
             });
         }
 
-        const payload = { store };
+        const payload = { id: store._id };
         const options = { expiresIn: '2d', issuer: 'https://hitwo-api.herokuapp.com' };
         const secret = process.env.JWT_SECRET;
         const token = jwt.sign(payload, secret, options);
