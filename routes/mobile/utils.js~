@@ -61,8 +61,7 @@ router.get('/get_token/:number', (req, res) => {
                 if(response.messages[0]['status'] === "0") {
                     console.log("Message sent successfully.");
                     return res.status(200).json({
-                        status: true,
-                        id: user._id
+                        status: true
                     });
                 } else {
                     console.log(`Message failed with error: ${response.messages[0]['error-text']}`);
