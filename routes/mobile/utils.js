@@ -1,6 +1,7 @@
 const router = require('express').Router();
 var Users = require('../../models/users');
 const Nexmo = require('nexmo');
+const Products = require('./../../models/products');
 
 const nexmo = new Nexmo({
     apiKey: '397d74eb',
@@ -73,6 +74,20 @@ router.get('/get_token/:number', (req, res) => {
             }
         });
     }).catch(e => console.log(e));
+});
+
+router.get('/search/:query', (req, res) => {
+    Products.find({
+        name: query
+    }).then((data) => {
+        if(!data){
+            return res.status(404).json({
+                message: "No products found"
+            });
+        }
+
+        return res.status(200).send(data);
+    }).catch((e) => res.status(500).json({message: "Server error"}))
 });
 
 module.exports = router;
