@@ -78,7 +78,7 @@ router.get('/get_token/:number', (req, res) => {
 
 router.get('/search/:query', (req, res) => {
     Products.find({
-        name: query
+        name: query || model : query
     }).then((data) => {
         if(!data){
             return res.status(404).json({
