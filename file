@@ -1,0 +1,28 @@
+console.log("product upload process fired");
+    var {name, model, colors = [], size=null, price, storeId, description} = req.body;
+    var {storeId1, storeName, storeAddress, storeLatitide, storeLongitude} = await getStoreDetails(storeId);
+    var nameOfFile = req.files.file.name;
+    var fileType = req.files.file.mimetype;
+
+    supportedFileTypes.forEach(file => {
+        if(file.fileTypeRegex.test(fileType)){
+            console.log(`its an ${file.fileType}`);
+            req.files.file.mv(`${path.resolve(file_path)}/` + nameOfFile, function(err){
+                if(err){
+                    console.log(err);
+                    res.json({
+                        message: "an error occured"
+                    });
+                }else{
+                    var image = new Images();
+                    image.path = `${path.resolve(file_path)}/${nameOfFile}`;
+                    image.save()
+                        .then((file) => {
+                            res.json({
+                                message: "upload complete",
+                                image_url: `http://localhost:8081/upload/uploads/${file._id}`
+                            });
+                        });
+                }
+            });
+        }

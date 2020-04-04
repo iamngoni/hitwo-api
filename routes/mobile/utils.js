@@ -76,18 +76,4 @@ router.get('/get_token/:number', (req, res) => {
     }).catch(e => console.log(e));
 });
 
-router.get('/search/:query', (req, res) => {
-    Products.find({
-        name: query || model : query
-    }).then((data) => {
-        if(!data){
-            return res.status(404).json({
-                message: "No products found"
-            });
-        }
-
-        return res.status(200).send(data);
-    }).catch((e) => res.status(500).json({message: "Server error"}))
-});
-
 module.exports = router;
