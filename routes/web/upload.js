@@ -4,10 +4,10 @@ const path = require("path");
 const fileUploader = require("express-fileupload");
 const Images = require("./../../models/images");
 const Stores = require("./../../models/store");
+const fs = require('fs');
 
 const file_path = "./public/images";
 router.use(fileUploader());
-
 
 //using regex to test & upload files
 const supportedFileTypes = [
@@ -16,7 +16,7 @@ const supportedFileTypes = [
 
 router.post("/", async(req, res) => {
     console.log("product upload process fired");
-    var {name, model, colors = [], size=null, price, storeId, description} = req.body;
+    var {name, model, colors = [], size=null, price, storeId, description, category} = req.body;
     var nameOfFile = req.files.file.name;
     var fileType = req.files.file.mimetype;
 
@@ -43,7 +43,7 @@ router.post("/", async(req, res) => {
                                 var product_data = new Products();
                                 product_data.name = name;
                                 product_data.model = model;
-                                product_data.imageUrl = `http://localhost:8081/upload/uploads/${file._id}`;
+                                product_data.imageUrl = `http://192.168.43.213:8080/store/upload/uploads/${file._id}`;
                                 if(colors != []){
                                     product_data.colors = colors;
                                 }
@@ -51,6 +51,7 @@ router.post("/", async(req, res) => {
                                     product_data.size = size;
                                 }
                                 product_data.price = price;
+                                product_data.category = category;
                                 product_data.description = description;
                                 product_data.storeName = store.name;
                                 product_data.storeId = store._id;

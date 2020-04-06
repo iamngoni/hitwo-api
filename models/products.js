@@ -4,12 +4,10 @@ var productsSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
-        lowercase: true
     },
     model: {
         type: String,
         required: true,
-        lowercase: true
     },
     imageUrl: {
         type: String,
