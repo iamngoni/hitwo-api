@@ -43,7 +43,7 @@ router.post("/", async(req, res) => {
                                 var product_data = new Products();
                                 product_data.name = name;
                                 product_data.model = model;
-                                product_data.imageUrl = `http://192.168.43.213:8080/store/upload/uploads/${file._id}`;
+                                product_data.imageUrl = `http://192.168.43.213:8080/public/uploads/${file._id}`;
                                 if(colors != []){
                                     product_data.colors = colors;
                                 }
