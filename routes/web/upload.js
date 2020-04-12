@@ -6,7 +6,7 @@ const Images = require("./../../models/images");
 const Stores = require("./../../models/store");
 const fs = require('fs');
 
-const file_path = "./public/images";
+const file_path = "./public/server-images";
 router.use(fileUploader());
 
 //using regex to test & upload files

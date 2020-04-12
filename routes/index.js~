@@ -12,28 +12,18 @@ router.use('/mobile', require('./mobile'));
 router.use('/store', require('./web'));
 router.use('/public', require('./public'));
 
-//web view routes routes
+//index routes
 router.get("/portal", (req, res) => {
     res.render("portal_login", {
         title: "Easy Locate | Portal Login",
-        notifications: req.flash("notifications"),
+        notifications: req.flash("messages"),
         errors: req.flash("errors")
     });
 });
 
-router.get("/register", (req, res) => {
-    res.render("portal_register", {
-        title: "Easy Locate | Portal Register", 
-        notifications: req.flash("notifications"),
-        errors: req.flash("errors")
-    })
-});
-
 router.get("/dashboard", (req, res) => {
     res.render("protected/dashboard", {
-        title: "Easy Locate | Dashboard",
-        notifications: req.flash("notifications"),
-        errors: req.flash("errors")
+        title: "Easy Locate | Dashboard"
     });
 });
 

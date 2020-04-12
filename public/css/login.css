@@ -1,0 +1,74 @@
+:root{
+    --main-color: #7571E9;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Nunito Light', sans-serif;
+    color: black;
+    width: 100%;
+}
+
+.nvbg{
+    background-color: var(--main-color);
+    border-radius: 5px;
+}
+
+#brand{
+    font-style: italic;
+}
+
+.buttons{
+    color: var(--main-color);
+    transition: all .4s;
+}
+
+.buttons:hover{
+    transform: scale(1.09);
+}
+
+.buttons-submit{
+    background-color: var(--main-color);
+    color: white;
+    transition: all .4s;
+}
+
+
+.buttons-submit:hover{
+    transform: scale(1.01);
+}
+
+.text-bold{
+    font-weight: bold;
+}
+
+.large-text{
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.footer{
+    background-color: var(--main-color);
+    width: 30%;
+    height: 15px;
+    color: white;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+@media(max-width: 544px){
+    .footer{
+        width: 100%;
+        height: 5%;
+    }
+}
+
+@media(max-width: 768px){
+    .footer{
+        width: 100%;
+        height: 7%;
+    }
+}

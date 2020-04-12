@@ -1,15 +1,11 @@
 {
-  "name": "hitwo-api",
+  "name": "backend",
   "version": "1.0.0",
   "description": "Backend services for hit200",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iamngvj/hitwo-api.git"
   },
   "keywords": [
     "hit200",

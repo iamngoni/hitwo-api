@@ -1,31 +1,29 @@
-const router = require('express').Router();
-const Store = require('./../../models/store');
-const jwt = require('jsonwebtoken');
+const router = require("express").Router();
+const Store = require("./../../models/store");
+// const jwt = require('jsonwebtoken');
+const cp = require("cookie-parser");
+const session = require("express-session");
+const flash = require("connect-flash");
 
-router.post('/', (req, res) => {
+router.use(cp());
+router.use(session({ cookie: { maxAge: 60000 }, resave: true, saveUninitialized: false, secret: 'hitwo-api' }));
+router.use(flash());
+router.post("/", (req, res) => {
     var { email, password } = req.body;
     Store.findOne({ email }).then((store) => {
-        if (!store && !store.validatePassword(password)) {
-            return res.status(401).json({
-                message: 'Email or password don\'t match. Try again or create an account.'
-            });
+        if (!store) {
+            console.log("store doesn't exist");
+            req.flash("errors", "Store with provided email doesn't exist.");
+            return res.redirect("/portal");
         }
 
-        const payload = { id: store._id };
-        const options = { expiresIn: '2d', issuer: 'https://hitwo-api.herokuapp.com' };
-        const secret = process.env.JWT_SECRET;
-        const token = jwt.sign(payload, secret, options);
-
-        return res.status(200).json({
-            name: store.name,
-            address: store.address,
-            latitude: store.latitude,
-            longitude: store.longitude,
-            email: store.email,
-            phone: store.phone,
-            token: token,
-            message: "Store Authenticated Successfully"
-        });  
+        if(!store.validatePassword(password)){
+            console.log("incorrect password");
+            req.flash("errors", "The provided password was incorrect.");
+            return res.redirect("/portal");
+        }
+        console.log("login success. redirecting to dashboard");
+        return res.redirect("/dashboard")
     }).catch((err) => {
         console.log(err);
         return res.status(500).json({
