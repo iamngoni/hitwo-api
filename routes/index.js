@@ -17,7 +17,8 @@ router.get("/portal", (req, res) => {
     res.render("portal_login", {
         title: "Easy Locate | Portal Login",
         notifications: req.flash("notifications"),
-        errors: req.flash("errors")
+        errors: req.flash("errors"),
+        success: req.flash("success")
     });
 });
 
@@ -25,7 +26,8 @@ router.get("/register", (req, res) => {
     res.render("portal_register", {
         title: "Easy Locate | Portal Register", 
         notifications: req.flash("notifications"),
-        errors: req.flash("errors")
+        errors: req.flash("errors"),
+        success: req.flash("success")
     })
 });
 
@@ -33,7 +35,8 @@ router.get("/dashboard", (req, res) => {
     res.render("protected/dashboard", {
         title: "Easy Locate | Dashboard",
         notifications: req.flash("notifications"),
-        errors: req.flash("errors")
+        errors: req.flash("errors"),
+        success: req.flash("success")
     });
 });
 

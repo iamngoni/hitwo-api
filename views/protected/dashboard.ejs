@@ -3,5 +3,28 @@
     <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
-    
+    <% if(errors != ""){ %>
+        <div class="alert alert-danger my-5 p-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <%=errors%>
+        </div>
+    <% } %>
+    <% if(notifications != ""){ %>
+        <div class="alert alert-primary my-5 p-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <%=notifications%>
+        </div>
+    <% } %>
+    <% if(success != ""){ %>
+        <div class="alert alert-success my-5 p-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <%=success%>
+        </div>
+    <% } %>
 </body>

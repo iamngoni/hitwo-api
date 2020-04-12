@@ -27,6 +27,22 @@
             <%=errors%>
         </div>
     <% } %>
+    <% if(notifications != ""){ %>
+        <div class="alert alert-primary my-5 p-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <%=notifications%>
+        </div>
+    <% } %>
+    <% if(success != ""){ %>
+        <div class="alert alert-success my-5 p-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <%=success%>
+        </div>
+    <% } %>
     <div class="container-fluid bg-white my-5 p-3">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-12 login-form-area">

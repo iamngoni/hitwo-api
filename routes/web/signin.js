@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const Store = require("./../../models/store");
-// const jwt = require('jsonwebtoken');
 const cp = require("cookie-parser");
 const session = require("express-session");
 const flash = require("connect-flash");
@@ -23,6 +22,7 @@ router.post("/", (req, res) => {
             return res.redirect("/portal");
         }
         console.log("login success. redirecting to dashboard");
+        req.flash("success", "Store successfully signed in.")
         return res.redirect("/dashboard")
     }).catch((err) => {
         console.log(err);

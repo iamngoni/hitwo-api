@@ -27,12 +27,28 @@
             <%=errors%>
         </div>
     <% } %>
+    <% if(notifications != ""){ %>
+        <div class="alert alert-primary my-5 p-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <%=notifications%>
+        </div>
+    <% } %>
+    <% if(success != ""){ %>
+        <div class="alert alert-success my-5 p-3" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <%=success%>
+        </div>
+    <% } %>
     <div class="container-fluid bg-white my-5 p-3">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-12 login-form-area">
                 <h3 class="text-xs-center text-sm-center text-md-left">Register Business Details Below</h3>
                 <hr>
-                <form id="loginform" name="loginform" method="POST" action="/store/signup" onsubmit="login(event)">
+                <form id="registrationForm" name="registrationForm" method="POST" action="/store/signup" onsubmit="register(event)">
                     <fieldset class="form-group">
                         <label for="name">Name</label>
                         <label for="error" class="text-danger" id="name-error"></label>
@@ -44,9 +60,21 @@
                         <hr>
                         <label for="phone">Business Contact Number <span>[Strictly include country code]</span></label>
                         <label for="error" class="text-danger" id="contact-error"></label>
-                        <input type="text" class="form-control" name="phone" id="phone" placeholder="📱 263 771 111 111">
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="📱 263 771 111 111" required>
                         <hr>
-
+                        <label for="address">Address</label>
+                        <label for="error" class="text-danger" id="address-error"></label>
+                        <input type="text" class="form-control" name="address" id="address" placeholder="21 Catalina Rd, Belvedere, Harare" required>
+                        <label for="latitude">Latitude</label>
+                        <input type="text" class="form-control" name="latitude" id="latitude" required>
+                        <label for="longitude">Longitude</label>
+                        <input type="text" class="form-control" name="longitude" id="longitude" required>
+                        <label for="password">Password</label>
+                        <label for="error" class="text-danger" id="password-error"></label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="🔐 ********" required>
+                        <label for="password">Password Confirmation</label>
+                        <label for="error" class="text-danger" id="password-confirmation-error"></label>
+                        <input type="password" class="form-control" name="password-confirmation" id="password-confirmation" placeholder="🔐 ********" required>
                     </fieldset>
                     <button class="form-control buttons-submit" type="submit" id="btn-login">LOGIN</button>
                 </form>
@@ -63,15 +91,32 @@
     </div>
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script>
-        function login(event){
+        function register(event){
             event.preventDefault();
+            var name = $('#name').val();
             var email = $('#email').val();
+            var phone = $('#phone').val();
+            var address = $('#address').val();
+            var latitude = $('#latitude').val();
+            var longitude = $('#longitude').val();
             var password = $('#password').val();
+            var passwordConfirmation = $('#password-confirmation').val();
+
             if(password.length < 8){
                 $("#password").focus();
-                return document.getElementById("pass-error").innerText = "(password length is below expected minimum)";
+                return document.getElementById("password-error").innerText = "(password length is below expected minimum)";
+            }else if(password != passwordConfirmation){
+                $('#password-confirmation').focus();
+                return document.getElementById("password-confirmation-error").innerText = "(passwords don't match)";
+            }else if(phone.length != 12){
+                var code = phone.substring(0, 3);
+                if(code != "263"){
+                    return document.getElementById("contact-error").innerHTML = "(please use the specified format i.e 263<sup>*</sup>)"
+                }else{
+                    return document.getElementById("contact-error").innerText = "(some values might be missing)";
+                }
             }else{
-                document.loginform.submit();
+                document.registrationForm.submit();
             }
         }
     </script>
