@@ -22,14 +22,15 @@ router.post("/", (req, res) => {
             return res.redirect("/portal");
         }
         console.log("login success. redirecting to dashboard");
-        req.flash("success", "Store successfully signed in.")
+        req.flash("success", "Store successfully signed in.");
+        res.cookie('store_id', store._id);
         return res.redirect("/dashboard")
     }).catch((err) => {
         console.log(err);
         return res.status(500).json({
             message: 'Server error'
         });
-    })
+    });
 });
 
 module.exports = router;

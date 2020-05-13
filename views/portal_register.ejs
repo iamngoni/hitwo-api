@@ -96,6 +96,26 @@
     </div>
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script>
+        $(document).ready(() => {
+            getLocation();
+        });
+
+        function getLocation(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(geoSuccess);
+            }else{
+                alert("Geolocation is not supported in this browser");
+            }
+        }
+
+        function geoSuccess(position){
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            document.getElementById("latitude").value = lat;
+            document.getElementById("longitude").value = lng;
+            alert(lat);
+        }
+
         function register(event){
             event.preventDefault();
             var name = $('#name').val();

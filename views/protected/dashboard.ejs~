@@ -5,7 +5,7 @@
 <body>
   <section id="container">
     <nav class="navbar navbar-expand-md navbar-light nvbg">
-      <a class="navbar-brand" href="#"><span id="brand" class="text-bold text-white">Easy</span> Locate <span class="text-white">: <%=name%></span></a>
+      <a class="navbar-brand" href="#"><span id="brand" class="text-bold text-white">Easy</span> Locate <span class="text-white">> <%=name%></span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
         <span class="navbar-toggler-icon"></span>
       </button>

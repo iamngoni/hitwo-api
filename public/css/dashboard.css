@@ -1,0 +1,53 @@
+:root{
+    --main-color: #7571E9;
+}
+
+body{
+    font-family: 'Nunito Light', sans-serif;
+    color: black;
+    width: 100%;
+}
+
+.nvbg{
+    background-color: var(--main-color);
+}
+
+#brand{
+    font-style: italic;
+}
+
+.buttons{
+    color: var(--main-color);
+    transition: all .4s;
+}
+
+.buttons:hover{
+    transform: scale(1.09);
+}
+
+#sidebar{
+    /* width: 60px; */
+    height: 100%;
+    position: fixed;
+    background: #2f323a;
+}
+
+.dashboard-links{
+    list-style: none;
+    font-size: 1.7rem;
+    color: var(--main-color);
+}
+
+.icons-active{
+    background-color: white;
+    border-radius: 5px;
+}
+
+.icons{
+    border-radius: 5px;
+    transition: all .4s;
+}
+
+.icons:hover{
+    background-color: white;
+}
