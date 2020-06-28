@@ -1,7 +1,7 @@
-const router = require('express').Router();
+const router = require('express').Router()
 
-router.use('/signin', require('./signin'));
-router.use('/signup', require('./signup'));
-router.use('/upload', require('./upload'));
+router.use('/signin', require('./signin'))
+router.use('/signup', require('./signup'))
+router.use('/upload', require('./upload'))
 
-module.exports = router;
+module.exports = router

@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 var images = mongoose.Schema({
-    path: String
-});
+  path: String
+})
 
-module.exports = mongoose.model("Images", images);
+module.exports = mongoose.model('Images', images)
