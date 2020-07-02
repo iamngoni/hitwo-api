@@ -3,5 +3,6 @@
     "synthwave84.brightness": 1,
     "editor.fontFamily": "Courier New",
     "editor.fontSize": 12,
-    "terminal.integrated.fontSize": 12
+    "terminal.integrated.fontSize": 12,
+    "editor.tabSize": 2
 }
