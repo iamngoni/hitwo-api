@@ -10,7 +10,7 @@ module.exports = {
         return res.status(403).json({})
       }
       try {
-        const decoded = await jwt.verify(token, process.env.SECRET_KEY)
+        const decoded = await jwt.verify(token, 'hitwo-api')
         req.user = decoded
         return next()
       } catch (error) {
