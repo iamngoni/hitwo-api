@@ -116,10 +116,12 @@ module.exports = {
               })
             } else {
               console.log('Errors happen all the time')
+              return res.status(500).json({message: 'server error'})
             }
           }
         )
       } else {
+        return res.status(401).json({message: 'token is wrong'})
         console.log('token string is wrong')
       }
     }).catch(e => console.log(e))
