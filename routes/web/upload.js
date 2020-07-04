@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
       req.files.file.mv(`${path.resolve(file_path)}/` + nameOfFile, function (err) {
         if (err) {
           console.log(err)
-          res.json({
+          res.status(501).json({
             message: err
           })
         } else {
