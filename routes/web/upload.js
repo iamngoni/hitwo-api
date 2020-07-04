@@ -5,6 +5,7 @@ const fileUploader = require('express-fileupload')
 const Images = require('./../../models/images')
 const Stores = require('./../../models/store')
 const fs = require('fs')
+const config = require('./../../config')
 
 const file_path = './public/server-images'
 router.use(fileUploader())
@@ -43,7 +44,7 @@ router.post('/', async (req, res) => {
                 var product_data = new Products()
                 product_data.name = name
                 product_data.model = model
-                product_data.imageUrl = `http://192.168.43.213:8080/public/uploads/${file._id}`
+                product_data.imageUrl = `${config.base_url}/${file._id}`
                 if (colors != []) {
                   product_data.colors = colors
                 }
