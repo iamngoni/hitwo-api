@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
         if (err) {
           console.log(err)
           res.json({
-            message: 'an error occured'
+            message: err
           })
         } else {
           var image = new Images()
