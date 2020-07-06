@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
                 var product_data = new Products()
                 product_data.name = name
                 product_data.model = model
-                product_data.imageUrl = `${config.base_url}/${file._id}`
+                product_data.imageUrl = `${config.base_url}/public/uploads/${file._id}`
                 if (colors != []) {
                   product_data.colors = colors
                 }

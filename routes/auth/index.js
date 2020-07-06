@@ -7,7 +7,7 @@ module.exports = {
       const bearer = bearerHeader.split(' ')
       const token = bearer[1]
       if (!token) {
-        return res.status(403).json({message: "no token found"})
+        return res.status(403).json({ message: 'no token found' })
       }
       try {
         const decoded = await jwt.verify(token, 'hitwo-api')
@@ -17,7 +17,7 @@ module.exports = {
         return res.status(500).json({})
       }
     } else {
-      return res.status(403).json({message: "bearer is undefined"})
+      return res.status(403).json({ message: 'bearer is undefined' })
     }
   }
 }

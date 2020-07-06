@@ -10,5 +10,7 @@ router.use('/change_password', auth.verifyToken, controller.changePassword)
 router.use('/products', auth.verifyToken, controller.getProducts)
 router.use('/rate', auth.verifyToken, controller.rateProduct)
 router.use('/comment/:id', auth.verifyToken, controller.postAComment)
+router.use('/product/:id', auth.verifyToken, controller.getProductbyId)
+router.use('/category/:category', auth.verifyToken, controller.getProductsByCategory)
 
 module.exports = router

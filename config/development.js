@@ -3,5 +3,5 @@ module.exports = {
   db: 'mongodb://localhost:27017/hitwo-database',
   port: 8080,
   message: 'Connected to a local instance of MongoDB',
-  base_url: 'http://localhost:8080'
+  base_url: 'http://10.15.17.185:8080'
 }

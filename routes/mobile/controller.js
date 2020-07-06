@@ -116,12 +116,12 @@ module.exports = {
               })
             } else {
               console.log('Errors happen all the time')
-              return res.status(500).json({message: 'server error'})
+              return res.status(500).json({ message: 'server error' })
             }
           }
         )
       } else {
-        return res.status(401).json({message: 'token is wrong'})
+        return res.status(401).json({ message: 'token is wrong' })
         console.log('token string is wrong')
       }
     }).catch(e => console.log(e))
@@ -247,5 +247,19 @@ module.exports = {
     return res.status(200).json({
       message: 'comment send'
     })
+  },
+  getProductbyId: async(req, res) => {
+    var productId = req.params.id
+    var product = await Products.findById(productId);
+    if(!product){
+      return res.status(404).json({})
+    }
+    return res.status(200).send(product);
+  },
+  getProductsByCategory: async(req, res) => {
+    var cat = req.params.category
+    var products = await Products.find()
+    var bycategory = products.filter(product => product.category === cat)
+    return res.status(200).send(bycategory)
   }
 }
