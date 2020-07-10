@@ -12,5 +12,8 @@ router.use('/rate', auth.verifyToken, controller.rateProduct)
 router.use('/comment/:id', auth.verifyToken, controller.postAComment)
 router.use('/product/:id', auth.verifyToken, controller.getProductbyId)
 router.use('/category/:category', auth.verifyToken, controller.getProductsByCategory)
+router.use('/selected/:storeId/:productId', controller.getMapInfo)
+router.use('/categories', controller.getCategories)
+router.use('/markers/stores/:productId', controller.getRelatedStores)
 
 module.exports = router

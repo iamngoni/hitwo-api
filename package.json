@@ -35,6 +35,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^0.3.0",
     "express-session": "^1.17.0",
+    "filein": "^1.0.0",
     "helmet": "^3.21.2",
     "js-sha512": "^0.8.0",
     "jsonwebtoken": "^8.5.1",

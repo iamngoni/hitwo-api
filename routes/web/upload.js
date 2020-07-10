@@ -6,6 +6,8 @@ const Images = require('./../../models/images')
 const Stores = require('./../../models/store')
 const fs = require('fs')
 const config = require('./../../config')
+// const Filein = require('filein')
+const { Buffer } = require('buffer')
 
 const file_path = './public/server-images'
 router.use(fileUploader())
@@ -21,59 +23,42 @@ router.post('/', async (req, res) => {
   var nameOfFile = req.files.file.name
   var fileType = req.files.file.mimetype
 
-  supportedFileTypes.forEach(file => {
+  supportedFileTypes.forEach(async file => {
     if (file.fileTypeRegex.test(fileType)) {
-      console.log(`its an ${file.fileType}`)
-      req.files.file.mv(`${path.resolve(file_path)}/` + nameOfFile, function (err) {
-        if (err) {
-          console.log(err)
-          res.status(501).json({
-            message: err
+      const filex = await Filein.upload(Buffer.from(file))
+      Stores.findById(storeId).then(store => {
+        if (!store) {
+          return res.status(404).json({
+            message: 'store unknown'
           })
-        } else {
-          var image = new Images()
-          image.path = `${path.resolve(file_path)}/${nameOfFile}`
-          image.save()
-            .then((file) => {
-              Stores.findById(storeId).then(store => {
-                if (!store) {
-                  return res.status(404).json({
-                    message: 'store unknown'
-                  })
-                }
-                var product_data = new Products()
-                product_data.name = name
-                product_data.model = model
-                product_data.imageUrl = `${config.base_url}/public/uploads/${file._id}`
-                if (colors != []) {
-                  product_data.colors = colors
-                }
-                if (size != null) {
-                  product_data.size = size
-                }
-                product_data.price = price
-                product_data.category = category
-                product_data.description = description
-                product_data.storeName = store.name
-                product_data.storeId = store._id
-                product_data.storeAddress = store.address
-                product_data.storeLatitude = store.latitude
-                product_data.storeLongitude = store.longitude
-                product_data.save()
-                  .then(product => {
-                    if (!product) {
-                      return res.status(500).json({
-                        message: 'failed to upload product'
-                      })
-                    }
-                    return res.status(200).json({
-                      message: 'product upload complete',
-                      image_url: product.imageUrl
-                    })
-                  }).catch(err => res.status(500).json({ message: 'failed to create product' }))
-              })
-            }).catch((err) => console.log(err))
         }
+        var product_data = new Products()
+        product_data.name = name
+        product_data.model = model
+        product_data.imageUrl = filex.url
+        if (colors != []) {
+          product_data.colors = colors
+        }
+        if (size != null) {
+          product_data.size = size
+        }
+        product_data.price = price
+        product_data.category = category
+        product_data.description = description
+        product_data.storeName = store.name
+        product_data.storeId = store._id
+        product_data.save()
+          .then(product => {
+            if (!product) {
+              return res.status(500).json({
+                message: 'failed to upload product'
+              })
+            }
+            return res.status(200).json({
+              message: 'product upload complete',
+              image_url: product.imageUrl
+            })
+          }).catch(err => res.status(500).json({ message: 'failed to create product' }))
       })
     }
   })

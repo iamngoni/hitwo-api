@@ -44,17 +44,9 @@ var productsSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  storeName: {
-    type: String
-  },
   storeId: {
     type: String
   },
-  storeAddress: {
-    type: String
-  },
-  storeLatitude: Number,
-  storeLongitude: Number,
   category: String,
   metadata: {
     type: Array,

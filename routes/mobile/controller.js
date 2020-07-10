@@ -4,7 +4,11 @@ const Nexmo = require('nexmo')
 const crypto = require('crypto')
 const Products = require('./../../models/products')
 const Comments = require('./../../models/comments')
+const Store = require('./../../models/store')
 const { appendFileSync } = require('fs')
+const Categories = require('./../../models/categories')
+const utilities = require('./utilities')
+const store = require('./../../models/store')
 
 const nexmo = new Nexmo({
   apiKey: '397d74eb',
@@ -261,5 +265,55 @@ module.exports = {
     var products = await Products.find()
     var bycategory = products.filter(product => product.category === cat)
     return res.status(200).send(bycategory)
+  },
+  getMapInfo: async(req, res) => {
+    var storeId = req.params.storeId
+    var productId = req.params.productId
+    try{
+      var store = await Store.findById(storeId)
+      var product = await Products.findById(productId)
+      if(!store || !product){
+        res.status(404).json({message: 'You\'re a ZANU supporter'})
+      }
+
+      var stores = []
+      var searchedFor = await Products.find()
+      var xproducts = await searchedFor.filter(x => x.name.includes(product.name) || x.model.includes(product.name) || x.description.includes(product.name))
+      xproducts.forEach(async productx => {
+        var prx = []
+        var storex = await Store.findById(productx.storeId)
+        console.log(prx)
+        stores = prx
+      })
+      console.log(stores)
+      var response = {
+        product,
+        store,
+      }
+      res.status(200).json(response)
+    }catch(e){
+      res.status(500).json({message: e.message})
+    }
+  },
+  getCategories: async(req, res) => {
+    var categories = await Categories.find()
+    res.send(categories)
+  },
+  getRelatedStores: async(req, res) => {
+    var productId = req.params.productId
+    var product = await Products.findById(productId)
+    var products = await Products.find({
+      $or: [
+        {name: {$regex: '.*' + product.name + '.*', $options: 'i'}},
+        {model: {$regex: '.*' + product.name + '.*', $options: 'i'}},
+        {description: {$regex: '.*' + product.name + '.*', $options: 'i'}}
+      ],
+    })
+    var stores = []
+    for(var i = 0; i < products.length; i++){
+      var storex = await Store.findById(products[i].storeId)
+      stores.push(storex)
+    }
+    return res.status(200).send(stores)
   }
 }
