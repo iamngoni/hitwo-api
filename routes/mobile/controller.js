@@ -317,5 +317,16 @@ module.exports = {
             stores.push(storex)
         }
         return res.status(200).send(stores)
+    },
+    search: async(req, res) => {
+        var {query} = req.body
+        var products = await Products.find({
+            $or: [
+                {name: {$regex: '.*' + query + '.*', $options: 'i'}},
+                {model: {$regex: '.*' + query + '.*', $options: 'i'}},
+                {description: {$regex: '.*' + query + '.*', $options: 'i'}},
+            ]
+        }).populate('owner')
+        return res.status(200).send(products)
     }
 }
