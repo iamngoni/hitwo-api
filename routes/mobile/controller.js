@@ -253,6 +253,11 @@ module.exports = {
             message: 'comment send'
         })
     },
+    getCommentByProductId: async(req, res) => {
+        var id = req.params.id
+        var comments = await Comments.findById(id)
+        res.status(200).send(comments)
+    },
     getProductbyId: async(req, res) => {
         var productId = req.params.id
         var product = await Products.findById(productId).populate("owner")
@@ -318,16 +323,4 @@ module.exports = {
         }
         return res.status(200).send(stores)
     },
-    search: async(req, res) => {
-        var {query} = req.body
-        var products = await Products.find({
-            $or: [
-                {name: {$regex: '.*' + query + '.*', $options: 'i'}},
-                {model: {$regex: '.*' + query + '.*', $options: 'i'}},
-                {description: {$regex: '.*' + query + '.*', $options: 'i'}},
-            ]
-        }).populate('owner')
-        console.log(products)
-        return res.status(200).send(products)
-    }
 }
