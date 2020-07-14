@@ -327,6 +327,7 @@ module.exports = {
                 {description: {$regex: '.*' + query + '.*', $options: 'i'}},
             ]
         }).populate('owner')
+        console.log(products)
         return res.status(200).send(products)
     }
 }
