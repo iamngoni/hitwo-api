@@ -15,5 +15,6 @@ router.use('/category/:category', auth.verifyToken, controller.getProductsByCate
 router.use('/selected/:storeId/:productId', controller.getMapInfo)
 router.use('/categories', controller.getCategories)
 router.use('/markers/stores/:productId', controller.getRelatedStores)
+router.use('/search', controller.search)
 
 module.exports = router
