@@ -4,13 +4,10 @@ const bp = require('body-parser')
 const cors = require('cors')
 const helmet = require('helmet')
 const logger = require('morgan')
-const engine = require('ejs-mate')
 const path = require('path')
 
 var app = express()
 
-app.engine('ejs', engine)
-app.set('view engine', 'ejs')
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 app.use(cors())

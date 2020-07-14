@@ -1,1 +1,0 @@
-GET http://localhost:8080/public/uploads/5e8a13a832d3fc1e45645d4e

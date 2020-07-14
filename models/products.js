@@ -5,6 +5,7 @@ var productsSchema = mongoose.Schema({
     type: String,
     required: true
   },
+
   model: {
     type: String,
     required: true
@@ -12,10 +13,6 @@ var productsSchema = mongoose.Schema({
   imageUrl: {
     type: String,
     required: true
-  },
-  colors: {
-    type: Array,
-    default: []
   },
   size: {
     type: Number,
@@ -41,17 +38,13 @@ var productsSchema = mongoose.Schema({
     type: Array
   },
   date: {
-    type: Date,
-    default: Date.now
-  },
-  storeId: {
     type: String
   },
-  category: String,
-  metadata: {
-    type: Array,
-    default: []
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
+  category: String,
   gallery: {
     type: Array,
     default: []

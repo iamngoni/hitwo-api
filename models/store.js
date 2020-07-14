@@ -1,41 +1,85 @@
 const mongoose = require('mongoose')
-const uuidv4 = require('uuid/v4')
-const crypto = require('crypto')
+const Schema = mongoose.Schema
+const bcrypt = require('bcrypt-nodejs')
 
-var storeSchema = mongoose.Schema({
-  name: {
+const UserSchema = new Schema({
+  Bname: String,
+  Bcategory: String,
+  Bemail: String,
+  Bphone: String,
+  Btype: String,
+  Blogo: String,
+
+  Fname: String,
+  Lname: String,
+  Username: String,
+  Email: {
     type: String
   },
-  address: {
+  Password: {
     type: String
   },
-  latitude: String,
-  longitude: String,
-  email: {
+  Aline1: String,
+  Aline2: String,
+  City: String,
+  State: String,
+  Country: String,
+  Zipcode: String,
+  registered: String,
+  Bdescription: String,
+  Adescription: String,
+  Email1: String,
+  Email2: String,
+  Facebook: String,
+  Twitter: String,
+  Whatsapp: String,
+  Phone: String,
+  Other: String,
+
+  Latitude: String,
+  Longitude: String,
+  paymentmade: false,
+  isChecked: {
     type: String,
-    unique: true
+    default: false
   },
-  phone: {
+  isLayout: {
     type: String,
-    unique: true
+    default: false
   },
-  hash: String,
-  salt: String
+  isGraph: {
+    type: String,
+    default: false
+  }
+
 })
 
-storeSchema.methods.setPassword = function (password) {
-  this.salt = crypto.randomBytes(16).toString('hex')
-  this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
+// encrypting before saving
+UserSchema.pre('save', function (next) {
+  const user = this
+  if (this.isModified('Password') || this.isNew) {
+    bcrypt.genSalt(10, function (err, salt) {
+      if (err) {
+        return next(err)
+      }
+      bcrypt.hash(user.Password, salt, null, function (err, hash) {
+        if (err) {
+          return next(err)
+        }
+
+        user.Password = hash
+        next()
+      })
+    })
+  } else {
+    return next()
+  }
+})
+
+UserSchema.methods.comparePassword = function (Password, next) {
+  // no arrow function coz we want to access the user using this;
+  const user = this
+  return bcrypt.compareSync(Password, user.Password)
 }
 
-storeSchema.methods.validatePassword = function (password) {
-  const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
-  return this.hash === hash
-}
-
-storeSchema.methods.setVerification = function () {
-  var theString = uuidv4()
-  this.verificationToken = theString
-}
-
-module.exports = mongoose.model('Stores', storeSchema)
+module.exports = mongoose.model('User', UserSchema)

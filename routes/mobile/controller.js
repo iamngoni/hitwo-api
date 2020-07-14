@@ -6,8 +6,6 @@ const Products = require('./../../models/products')
 const Comments = require('./../../models/comments')
 const Store = require('./../../models/store')
 const Categories = require('./../../models/categories')
-const utilities = require('./utilities')
-const store = require('./../../models/store')
 
 const nexmo = new Nexmo({
   apiKey: '397d74eb',
@@ -234,13 +232,13 @@ module.exports = {
   },
   postAComment: async (req, res) => {
     var usr = req.user
-    var { comment } = req.body
+    var { comment1 } = req.body
     var productId = req.params.id
     var comment = new Comments()
     comment.user.id = usr.id
     comment.user.name = usr.username
     comment.productId = productId
-    comment.comment = comment
+    comment.comment = comment1
     var isSaved = await comment.save()
     if (!isSaved) {
       return res.status(500).json({
@@ -251,28 +249,29 @@ module.exports = {
       message: 'comment send'
     })
   },
-  getProductbyId: async(req, res) => {
+  getProductbyId: async (req, res) => {
     var productId = req.params.id
-    var product = await Products.findById(productId);
-    if(!product){
+    var product = await Products.findById(productId).populate("owner")
+    console.log(product)
+    if (!product) {
       return res.status(404).json({})
     }
-    return res.status(200).send(product);
+    return res.status(200).send(product)
   },
-  getProductsByCategory: async(req, res) => {
+  getProductsByCategory: async (req, res) => {
     var cat = req.params.category
     var products = await Products.find()
     var bycategory = products.filter(product => product.category === cat)
     return res.status(200).send(bycategory)
   },
-  getMapInfo: async(req, res) => {
+  getMapInfo: async (req, res) => {
     var storeId = req.params.storeId
     var productId = req.params.productId
-    try{
+    try {
       var store = await Store.findById(storeId)
       var product = await Products.findById(productId)
-      if(!store || !product){
-        res.status(404).json({message: 'You\'re a ZANU supporter'})
+      if (!store || !product) {
+        res.status(404).json({ message: 'You\'re a ZANU supporter' })
       }
 
       var stores = []
@@ -287,30 +286,30 @@ module.exports = {
       console.log(stores)
       var response = {
         product,
-        store,
+        store
       }
       res.status(200).json(response)
-    }catch(e){
-      res.status(500).json({message: e.message})
+    } catch (e) {
+      res.status(500).json({ message: e.message })
     }
   },
-  getCategories: async(req, res) => {
+  getCategories: async (req, res) => {
     var categories = await Categories.find()
     res.send(categories)
   },
-  getRelatedStores: async(req, res) => {
+  getRelatedStores: async (req, res) => {
     var productId = req.params.productId
     var product = await Products.findById(productId)
     var products = await Products.find({
       $or: [
-        {name: {$regex: '.*' + product.name + '.*', $options: 'i'}},
-        {model: {$regex: '.*' + product.name + '.*', $options: 'i'}},
-        {description: {$regex: '.*' + product.name + '.*', $options: 'i'}}
-      ],
+        { name: { $regex: '.*' + product.name + '.*', $options: 'i' } },
+        { model: { $regex: '.*' + product.name + '.*', $options: 'i' } },
+        { description: { $regex: '.*' + product.name + '.*', $options: 'i' } }
+      ]
     })
     var stores = []
-    for(var i = 0; i < products.length; i++){
-      var storex = await Store.findById(products[i].storeId)
+    for (var i = 0; i < products.length; i++) {
+      var storex = await Store.findById(products[i].owner)
       stores.push(storex)
     }
     return res.status(200).send(stores)
